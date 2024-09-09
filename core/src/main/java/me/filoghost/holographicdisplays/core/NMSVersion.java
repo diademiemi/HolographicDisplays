@@ -60,12 +60,63 @@ public enum NMSVersion {
         return nmsManagerFactory.create(errorCollector);
     }
 
+
+    private static int[] BUKKIT_VERSION = null;
+    private static final Pattern DAY_MATCHER = Pattern.compile("(\\d+d)");
+    private static String MINECRAFT_PACKAGE;
+
+
+    public static String getMinecraftPackage() {
+        if (MINECRAFT_PACKAGE == null) {
+            int[] version = getVersion();
+            if (version == null)
+                throw new IllegalStateException();
+            String versionString = "v" + version[0] + "_" + version[1] + "_R";
+            String revision = null;
+            for (int i = 1; i <= 3; i++) {
+                try {
+                    Class.forName("org.bukkit.craftbukkit." + versionString + i + ".CraftServer");
+                    revision = versionString + i;
+                    break;
+                } catch (ClassNotFoundException ignored) {
+                }
+            }
+            if (revision == null)
+                throw new IllegalStateException();
+            MINECRAFT_PACKAGE = revision;
+        }
+        return MINECRAFT_PACKAGE;
+    }
+    public static int[] getVersion() {
+        if (BUKKIT_VERSION == null) {
+            String version = Bukkit.getBukkitVersion();
+
+            if (version == null || version.isEmpty())
+                return BUKKIT_VERSION = new int[] { 1, 8, 8 };
+
+            String[] parts = version.split("\\.");
+            if (parts[1].contains("-")) {
+                parts[1] = parts[1].split("-")[0];
+            }
+            if (parts[2].contains("-")) {
+                parts[2] = parts[2].split("-")[0];
+            }
+            if (parts.length == 3) {
+                return BUKKIT_VERSION = new int[] { Integer.parseInt(parts[0]), Integer.parseInt(parts[1]),
+                        Integer.parseInt(parts[2]) };
+            }
+            return BUKKIT_VERSION = new int[] { Integer.parseInt(parts[0]), Integer.parseInt(parts[1]) };
+        }
+        return BUKKIT_VERSION;
+    }
+
+
     public static NMSVersion getCurrent() {
         return CURRENT_VERSION;
     }
 
     private static NMSVersion detectCurrentVersion() {
-        Matcher matcher = Pattern.compile("v\\d+_\\d+_R\\d+").matcher(Bukkit.getServer().getClass().getPackage().getName());
+        Matcher matcher = Pattern.compile("v\\d+_\\d+_R\\d+").matcher(getMinecraftPackage());  // Sketchy but works
         if (!matcher.find()) {
             return UNKNOWN;
         }
