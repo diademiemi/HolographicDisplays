@@ -24,6 +24,7 @@ class DataWatcherKey<T> {
     static final DataWatcherKey<Byte> ENTITY_STATUS = new DataWatcherKey<>(0, BYTE_SERIALIZER);
     static final DataWatcherKey<Optional<IChatBaseComponent>> CUSTOM_NAME = new DataWatcherKey<>(2, OPTIONAL_CHAT_COMPONENT_SERIALIZER);
     static final DataWatcherKey<Boolean> CUSTOM_NAME_VISIBILITY = new DataWatcherKey<>(3, BOOLEAN_SERIALIZER);
+    static final DataWatcherKey<Boolean> HAS_NO_GRAVITY = new DataWatcherKey<>(5, BOOLEAN_SERIALIZER);
     static final DataWatcherKey<ItemStack> ITEM_STACK = new DataWatcherKey<>(8, ITEM_STACK_SERIALIZER);
     static final DataWatcherKey<Byte> ARMOR_STAND_STATUS = new DataWatcherKey<>(15, BYTE_SERIALIZER);
     static final DataWatcherKey<Integer> SLIME_SIZE = new DataWatcherKey<>(16, INT_SERIALIZER);

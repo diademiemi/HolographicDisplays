@@ -28,10 +28,18 @@ abstract class DataWatcherPacketBuilder<T> {
         return this;
     }
 
+    DataWatcherPacketBuilder<T> setNoGravity() {
+        packetByteBuffer.writeDataWatcherEntry(DataWatcherKey.HAS_NO_GRAVITY, true); // No gravity
+        return this;
+    }
+
+
     DataWatcherPacketBuilder<T> setArmorStandMarker() {
         setInvisible();
+        setNoGravity();
         packetByteBuffer.writeDataWatcherEntry(
-                DataWatcherKey.ARMOR_STAND_STATUS, (byte) (0x01 | 0x02 | 0x08 | 0x10)); // Small, no gravity, no base plate, marker
+                // [15, 0
+                DataWatcherKey.ARMOR_STAND_STATUS, (byte) (0x01 | 0x08 | 0x10)); // Small, no baseplate, marker
         return this;
     }
 

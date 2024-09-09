@@ -29,6 +29,7 @@ class VersionClickableNMSPacketEntity implements ClickableNMSPacketEntity {
                 new EntitySpawnNMSPacket(slimeID, EntityTypeID.SLIME, position, SLIME_Y_OFFSET),
                 EntityMetadataNMSPacket.builder(slimeID)
                         .setInvisible()
+                        .setNoGravity()
                         .setSlimeSmall() // Required for a correct client-side collision box
                         .build()
         );
