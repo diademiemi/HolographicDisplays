@@ -16,6 +16,25 @@ class EntitySpawnNMSPacket extends VersionNMSPacket {
 
     private final Packet<?> rawPacket;
 
+    /**
+     * This is the constructor in Minecraft to create a PacketPlayOutSpawnEntity:
+     private PacketPlayOutSpawnEntity(RegistryFriendlyByteBuf var0) {
+         this.d = var0.l();  // Deobfuscated: var.readVarInt()
+         this.e = var0.n();  // Deobfuscated: var.readUUID()
+         this.f = (EntityTypes) ByteBufCodecs.a(Registries.z).decode(var0);  // Not sure but this is the entity type
+         this.g = var0.readDouble();
+         this.h = var0.readDouble();
+         this.i = var0.readDouble();
+         this.m = var0.readByte();  // Beware that these are out of order!
+         this.n = var0.readByte();
+         this.o = var0.readByte();
+         this.p = var0.l();  // Deobfuscated: var.readVarInt()
+         this.j = var0.readShort();  // Read the variables in the correct order again
+         this.k = var0.readShort();
+         this.l = var0.readShort();
+     }
+     */
+
     EntitySpawnNMSPacket(EntityID entityID, int entityTypeID, PositionCoordinates position, double positionOffsetY) {
         PacketByteBuffer packetByteBuffer = PacketByteBuffer.get();
 
@@ -31,6 +50,10 @@ class EntitySpawnNMSPacket extends VersionNMSPacket {
         // Rotation
         packetByteBuffer.writeByte(0);
         packetByteBuffer.writeByte(0);
+//        packetByteBuffer.writeByte(0);
+
+        // To be honest I don't understand why "o" is not written here, reading the protocol and the constructor of PacketPlayOutSpawnEntity
+        // it seems like it should be required... but it's not written here
 
         // Object data
         if (entityTypeID == EntityTypeID.ITEM) {
