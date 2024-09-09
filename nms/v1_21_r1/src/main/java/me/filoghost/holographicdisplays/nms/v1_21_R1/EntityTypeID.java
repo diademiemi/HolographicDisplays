@@ -7,8 +7,8 @@ package me.filoghost.holographicdisplays.nms.v1_21_R1;
 
 class EntityTypeID {
 
-    static final int ARMOR_STAND = 2;
-    static final int ITEM = 55;
-    static final int SLIME = 89;
+    static final int ARMOR_STAND = 3;
+    static final int ITEM = 58;
+    static final int SLIME = 93;
 
 }
