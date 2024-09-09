@@ -21,6 +21,7 @@ class EntityDestroyNMSPacket extends VersionNMSPacket {
         packetByteBuffer.writeVarIntArray(entityID.getNumericID());
 
         StreamCodec<PacketDataSerializer, PacketPlayOutEntityDestroy> nmsCodec = PacketPlayOutEntityDestroy.a;
+        packetByteBuffer.copyToSerializer();
         PacketDataSerializer packetDataSerializer = packetByteBuffer.getInternalSerializer();
 
         this.rawPacket = nmsCodec.decode(packetDataSerializer);
@@ -32,6 +33,7 @@ class EntityDestroyNMSPacket extends VersionNMSPacket {
         packetByteBuffer.writeVarIntArray(entityID1.getNumericID(), entityID2.getNumericID());
 
         StreamCodec<PacketDataSerializer, PacketPlayOutEntityDestroy> nmsCodec = PacketPlayOutEntityDestroy.a;
+        packetByteBuffer.copyToSerializer();
         PacketDataSerializer packetDataSerializer = packetByteBuffer.getInternalSerializer();
 
         this.rawPacket = nmsCodec.decode(packetDataSerializer);

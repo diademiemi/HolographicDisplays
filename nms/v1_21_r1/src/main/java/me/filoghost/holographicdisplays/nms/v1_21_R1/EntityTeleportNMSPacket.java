@@ -34,6 +34,7 @@ class EntityTeleportNMSPacket extends VersionNMSPacket {
         packetByteBuffer.writeBoolean(false);
 
         StreamCodec<PacketDataSerializer, PacketPlayOutEntityTeleport> nmsCodec = PacketPlayOutEntityTeleport.a;
+        packetByteBuffer.copyToSerializer();
         PacketDataSerializer packetDataSerializer = packetByteBuffer.getInternalSerializer();
 
         this.rawPacket = nmsCodec.decode(packetDataSerializer);

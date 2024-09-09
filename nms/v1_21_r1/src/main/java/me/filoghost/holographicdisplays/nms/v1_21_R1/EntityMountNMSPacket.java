@@ -22,6 +22,7 @@ class EntityMountNMSPacket extends VersionNMSPacket {
         packetByteBuffer.writeVarIntArray(passengerEntityID.getNumericID());
 
         StreamCodec<PacketDataSerializer, PacketPlayOutMount> nmsCodec = PacketPlayOutMount.a;
+        packetByteBuffer.copyToSerializer();
         PacketDataSerializer packetDataSerializer = packetByteBuffer.getInternalSerializer();
 
         this.rawPacket = nmsCodec.decode(packetDataSerializer);
