@@ -71,6 +71,12 @@ public class InternalHologramLineParser {
         return result.toString();
     }
 
+    /**
+     * This likely does not work on >=1.20.5, but I have not gotten around to fixing it.
+     * @param serializedItem
+     * @return
+     * @throws InternalHologramLoadException
+     */
     @SuppressWarnings("deprecation")
     private static ItemStack parseItemStack(String serializedItem) throws InternalHologramLoadException {
         serializedItem = serializedItem.trim();
