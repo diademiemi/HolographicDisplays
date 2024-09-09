@@ -17,7 +17,7 @@ import org.bukkit.entity.Player;
 class InboundPacketHandler extends ChannelInboundHandlerAdapter {
 
     public static final String HANDLER_NAME = "holographic_displays_listener";
-    private static final ReflectField<Integer> ENTITY_ID_FIELD = ReflectField.lookup(int.class, PacketPlayInUseEntity.class, "a");
+    private static final ReflectField<Integer> ENTITY_ID_FIELD = ReflectField.lookup(int.class, PacketPlayInUseEntity.class, "b");
 
     private final Player player;
     private final PacketListener packetListener;

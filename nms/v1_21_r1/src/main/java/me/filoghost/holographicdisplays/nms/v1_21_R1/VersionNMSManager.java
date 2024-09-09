@@ -33,8 +33,14 @@ import java.util.function.Supplier;
 
 public class VersionNMSManager implements NMSManager {
 
-    private static final ReflectField<AtomicInteger> ENTITY_ID_COUNTER_FIELD = ReflectField.lookup(AtomicInteger.class, Entity.class, "d");
-    private static final ReflectField<NetworkManager> NETWORK_MANAGER_FIELD = ReflectField.lookup(NetworkManager.class, ServerCommonPacketListenerImpl.class, "c");
+    /*
+     * This needs to be the ENTITY_COUNTER field in the Entity class, which is a static AtomicInteger.
+     * In <1.21 this is obfuscated as "d", but in 1.21 it is obfuscated as "c".
+     * 1.19.4: https://mappings.dev/1.19.4/net/minecraft/world/entity/Entity.html
+     * 1.21.1: https://mappings.dev/1.21.1/net/minecraft/world/entity/Entity.html
+     */
+    private static final ReflectField<AtomicInteger> ENTITY_ID_COUNTER_FIELD = ReflectField.lookup(AtomicInteger.class, Entity.class, "c");
+    private static final ReflectField<NetworkManager> NETWORK_MANAGER_FIELD = ReflectField.lookup(NetworkManager.class, ServerCommonPacketListenerImpl.class, "e");
     private final Supplier<Integer> entityIDGenerator;
 
     public VersionNMSManager(ErrorCollector errorCollector) {
